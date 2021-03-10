@@ -438,19 +438,25 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>{{$material}}</td>
-                        <td>{{$substrate}}</td>
-                        <td>{{$metal}}</td>
-                        <td>{{$ligand}}</td>
-                        <td>{{$hydride}}</td>
-                        <td>{{$base}}</td>
-                        <td>{{$solvent}}</td>
-                        <td>{{$temperature}}</td>
-                        <td>{{$time}}</td>
-                        <td>{{$yield}}</td>
-                        <td>{{$remarks}}</td>
-                    </tr>
+                <tr>
+                    <td>{{$material}}</td>
+                    <td>{{$substrate}}</td>
+                    <td>{{$metal}}</td>
+                    <td>{{$ligand}}</td>
+                    <td>
+                        @isset ($hydride)
+                            <div>
+                                <img src="{{ asset('storage/' . $hydride) }}" alt="hydride">
+                            </div>
+                        @endisset
+                    </td>
+                    <td>{{$base}}</td>
+                    <td>{{$solvent}}</td>
+                    <td>{{$temperature}}</td>
+                    <td>{{$time}}</td>
+                    <td>{{$yield}}</td>
+                    <td>{{$remarks}}</td>
+                </tr>
                 </tbody>
             </table>
             <form action="{{ url('/complete')}}" method="POST">
