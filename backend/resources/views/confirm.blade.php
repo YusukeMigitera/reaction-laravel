@@ -66,10 +66,6 @@
             background-color: rgba(247, 250, 252, var(--bg-opacity))
         }
 
-        .border {
-            border: solid 1px #000;
-        }
-
         .border-gray-200 {
             --border-opacity: 1;
             border-color: #edf2f7;
@@ -131,11 +127,6 @@
         .mx-auto {
             margin-left: auto;
             margin-right: auto
-        }
-
-        .my-8 {
-            margin-top: 2rem;
-            margin-bottom: 2rem;
         }
 
         .ml-1 {
@@ -447,23 +438,36 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($data as $recode)
                     <tr>
-                        <td>{{$recode->material}}</td>
-                        <td>{{$recode->substrate}}</td>
-                        <td>{{$recode->metal}}</td>
-                        <td>{{$recode->ligand}}</td>
-                        <td>{{$recode->hydride}}</td>
-                        <td>{{$recode->base}}</td>
-                        <td>{{$recode->solvent}}</td>
-                        <td>{{$recode->temperature}}</td>
-                        <td>{{$recode->time}}</td>
-                        <td>{{$recode->yield}}</td>
-                        <td>{{$recode->remarks}}</td>
+                        <td>{{$material}}</td>
+                        <td>{{$substrate}}</td>
+                        <td>{{$metal}}</td>
+                        <td>{{$ligand}}</td>
+                        <td>{{$hydride}}</td>
+                        <td>{{$base}}</td>
+                        <td>{{$solvent}}</td>
+                        <td>{{$temperature}}</td>
+                        <td>{{$time}}</td>
+                        <td>{{$yield}}</td>
+                        <td>{{$remarks}}</td>
                     </tr>
-                @endforeach
                 </tbody>
             </table>
+            <form action="{{ url('/complete')}}" method="POST">
+                @csrf
+                <input type="hidden" name="material" value={{$material}}>
+                <input type="hidden" name="substrate" value={{$substrate}}>
+                <input type="hidden" name="metal" value={{$metal}}>
+                <input type="hidden" name="ligand" value={{$ligand}}>
+                <input type="hidden" name="hydride" value={{$hydride}}>
+                <input type="hidden" name="base" value={{$base}}>
+                <input type="hidden" name="solvent" value={{$solvent}}>
+                <input type="hidden" name="time" value={{$time}}>
+                <input type="hidden" name="temperature" value={{$temperature}}>
+                <input type="hidden" name="yield" value={{$yield}}>
+                <input type="hidden" name="remarks" value={{$remarks}}>
+                <div><input type="submit" name="complete"></div>
+            </form>
         </div>
 
         <div class="flex justify-center mt-4 sm:items-center sm:justify-between">
@@ -494,24 +498,6 @@
             <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
                 Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
             </div>
-        </div>
-
-        <div class="my-8 p-6 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-            <form action="{{ url('/confirm')}}" method="POST">
-                {{ csrf_field() }}
-                <div>原料<input class="border" type="text" name="material"></div>
-                <div>基質<input class="border" type="text" name="substrate"></div>
-                <div>金属<input class="border" type="text" name="metal"></div>
-                <div>リガンド<input class="border" type="text" name="ligand"></div>
-                <div>ヒドリド<input class="border" type="text" name="hydride"></div>
-                <div>塩基<input class="border" type="text" name="base"></div>
-                <div>溶媒<input class="border" type="text" name="solvent"></div>
-                <div>温度<input class="border" type="number" name="temperature"></div>
-                <div>時間<input class="border" type="number" name="time"></div>
-                <div>収率<input class="border" type="number" name="yield"></div>
-                <div>備考<textarea class="border" rows="2" name="remarks"></textarea></div>
-                <div><input type="submit" name="add"></div>
-            </form>
         </div>
     </div>
 </div>

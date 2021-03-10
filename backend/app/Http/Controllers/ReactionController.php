@@ -46,6 +46,44 @@ class ReactionController extends Controller
         return Reaction::create($request->all());
     }
 
+    public function page_confirm(Request $request)
+    {
+        //
+        $data = [
+            'material'  => $request->material,
+            'substrate'  => $request->substrate,
+            'metal'  => $request->metal,
+            'ligand'  => $request->ligand,
+            'hydride'  => $request->hydride,
+            'base'  => $request->base,
+            'solvent'  => $request->solvent,
+            'temperature'  => $request->temperature,
+            'time'  => $request->time,
+            'yield'  => $request->yield,
+            'remarks'  => $request->remarks,
+        ];
+        return view('confirm', $data);
+    }
+
+    public function page_store(Request $request)
+    {
+        //
+        $reaction = new Reaction;
+        $reaction->material = $request->material;
+        $reaction->substrate = $request->substrate;
+        $reaction->metal = $request->metal;
+        $reaction->ligand = $request->ligand;
+        $reaction->hydride = $request->hydride;
+        $reaction->base = $request->base;
+        $reaction->solvent = $request->solvent;
+        $reaction->temperature = $request->temperature;
+        $reaction->time = $request->time;
+        $reaction->yield = $request->yield;
+        $reaction->remarks = $request->remarks;
+        $reaction->save();
+        return redirect('/');
+    }
+
     /**
      * Display the specified resource.
      *
