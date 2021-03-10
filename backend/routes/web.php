@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ReactionController::class, 'page_index']);
+Route::post('/confirm', [ReactionController::class, 'page_confirm']);
+Route::post('/complete', [ReactionController::class, 'page_store']);
