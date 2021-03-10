@@ -18,6 +18,12 @@ class ReactionController extends Controller
         return Reaction::latest()->paginate();
     }
 
+    public function page_index()
+    {
+        //
+        return view('welcome', ['data' => $this->index()]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
