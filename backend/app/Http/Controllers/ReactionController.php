@@ -49,20 +49,42 @@ class ReactionController extends Controller
     public function page_confirm(Request $request)
     {
         //
-        $data = [
-            'material'  => $request->material,
-            'substrate'  => $request->substrate,
-            'metal'  => $request->metal,
-            'ligand'  => $request->ligand,
-            'hydride'  => $request->hydride,
-            'base'  => $request->base,
-            'solvent'  => $request->solvent,
-            'temperature'  => $request->temperature,
-            'time'  => $request->time,
-            'yield'  => $request->yield,
-            'remarks'  => $request->remarks,
-        ];
-        return view('confirm', $data);
+        $this->validate($request, [
+            //input nameのhydride
+            'hydride' => [
+                // 必須
+                'required',
+                // アップロードされたファイルであること
+                'file',
+                // 画像ファイルであること
+                'image',
+                // MIMEタイプを指定
+                'mimes:jpeg,png',
+            ]
+        ]);
+
+        if ($request->file('hydride')->isValid([])) {
+            $path = $request->hydride->store('public');
+            $data = [
+                'material'  => $request->material,
+                'substrate'  => $request->substrate,
+                'metal'  => $request->metal,
+                'ligand'  => $request->ligand,
+                'hydride'  => basename($path),
+                'base'  => $request->base,
+                'solvent'  => $request->solvent,
+                'temperature'  => $request->temperature,
+                'time'  => $request->time,
+                'yield'  => $request->yield,
+                'remarks'  => $request->remarks,
+            ];
+            return view('confirm', $data);
+        } else {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->withErrors();
+        }
     }
 
     public function page_store(Request $request)

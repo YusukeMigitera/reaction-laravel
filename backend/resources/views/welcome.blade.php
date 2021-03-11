@@ -453,7 +453,13 @@
                         <td>{{$recode->substrate}}</td>
                         <td>{{$recode->metal}}</td>
                         <td>{{$recode->ligand}}</td>
-                        <td>{{$recode->hydride}}</td>
+                        <td>
+                            @isset ($recode->hydride)
+                                <div>
+                                    <img src="{{ asset('storage/' . $recode->hydride) }}" alt="hydride">
+                                </div>
+                            @endisset
+                        </td>
                         <td>{{$recode->base}}</td>
                         <td>{{$recode->solvent}}</td>
                         <td>{{$recode->temperature}}</td>
@@ -497,13 +503,13 @@
         </div>
 
         <div class="my-8 p-6 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
-            <form action="{{ url('/confirm')}}" method="POST">
+            <form action="{{ url('/confirm')}}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div>原料<input class="border" type="text" name="material"></div>
                 <div>基質<input class="border" type="text" name="substrate"></div>
                 <div>金属<input class="border" type="text" name="metal"></div>
                 <div>リガンド<input class="border" type="text" name="ligand"></div>
-                <div>ヒドリド<input class="border" type="text" name="hydride"></div>
+                <div>ヒドリド<input class="" type="file" name="hydride"></div>
                 <div>塩基<input class="border" type="text" name="base"></div>
                 <div>溶媒<input class="border" type="text" name="solvent"></div>
                 <div>温度<input class="border" type="number" name="temperature"></div>
