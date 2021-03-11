@@ -1,30 +1,29 @@
-# docker-laravel 🐳
+# Reaction
 
-![License](https://img.shields.io/github/license/ucan-lab/docker-laravel?color=f05340)
-![Stars](https://img.shields.io/github/stars/ucan-lab/docker-laravel?color=f05340)
-![Issues](https://img.shields.io/github/issues/ucan-lab/docker-laravel?color=f05340)
-![Forks](https://img.shields.io/github/forks/ucan-lab/docker-laravel?color=f05340)
+## 概要
 
-## Introduction
+有機化学の条件を比較するWebアプリです。現在大学の研究室で扱っているテーマである「還元的ヘック反応」について、他の研究者が発表した条件の比較を便利に行う目的で作りました。同じことをエクセルでやっていたのですが、文字、数値しか扱えませんでした。同時に化学構造（画像）も見たかったので、Webの形をとろうと考えました。
 
-Build a simple laravel development environment with docker-compose.
-
-## Usage
+## 使い方
 
 ```bash
-$ git clone git@github.com:ucan-lab/docker-laravel.git
-$ cd docker-laravel
-$ make create-project # Install the latest Laravel project
-$ make install-recommend-packages # Not required
+$ docker-compose up -d
 ```
 
-http://localhost
+http://localhost にてトップページ('/')が見られます。比較表が表示されていて、その下に新規追加用のフォームがあります。追加は確認画面に移った後、送信するとトップにリダイレクトします。
 
-Read this [Makefile](https://github.com/ucan-lab/docker-laravel/blob/master/Makefile).
+## 使った技術
 
-## Tips
+Docker, Laravel, MySQL
 
-Read this [Wiki](https://github.com/ucan-lab/docker-laravel/wiki).
+- 手持ちのパソコンがWindowsだったのでWSL2の上でDockerを利用しました。
+- フロントはLaravelテンプレートを使っていますが、api.php, ReactionController.phpの設定によりAPIリクエストも受けられるようにしています。
+
+## 課題
+
+- 比較表の一覧表示において検索機能を追加する。
+- AWS ECSで運用する。
+- 画像の保存先をappコンテナからAWS S3(ローカルではminio)に切り離す。
 
 ## Container structure
 
