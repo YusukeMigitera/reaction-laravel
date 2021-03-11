@@ -14,7 +14,7 @@ http://localhost にてトップページ('/')が見られます。比較表が�
 
 ## 使った技術
 
-Docker, Laravel, MySQL
+Docker, Laravel, MySQL, GitHub Actions
 
 - 手持ちのパソコンがWindowsだったのでWSL2の上でDockerを利用しました。
 - フロントはLaravelテンプレートを使っていますが、api.php, ReactionController.phpの設定によりAPIリクエストも受けられるようにしています。
