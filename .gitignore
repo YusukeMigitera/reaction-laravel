@@ -3,3 +3,6 @@
 
 # Docker Compose
 .env
+
+#minio
+.docker

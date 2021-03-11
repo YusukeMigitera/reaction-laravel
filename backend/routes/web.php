@@ -17,3 +17,4 @@ use App\Http\Controllers\ReactionController;
 Route::get('/', [ReactionController::class, 'page_index']);
 Route::post('/confirm', [ReactionController::class, 'page_confirm']);
 Route::post('/complete', [ReactionController::class, 'page_store']);
+Route::get('assets/{asset}/download', [ReactionController::class, 'download'])->name('assets.download');

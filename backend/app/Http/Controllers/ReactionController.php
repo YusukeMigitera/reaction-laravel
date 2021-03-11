@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Reaction;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreAsset;
+use Illuminate\Support\Facades\Storage;
 
 class ReactionController extends Controller
 {
@@ -64,13 +66,21 @@ class ReactionController extends Controller
         ]);
 
         if ($request->file('hydride')->isValid([])) {
-            $path = $request->hydride->store('public');
+            $disk = Storage::disk('s3');
+            $disk->put('/', $request->file('hydride'), 'public');
+            $filename = $request->file('hydride')->getClientOriginalName();
+            $list = $disk->files('/');
+            $path = $disk->url('/'.$list[0]);
+//            $path = $request->hydride->store('assets', 's3');
+//            if (!$path) {
+//                abort(500);
+//            }
             $data = [
                 'material'  => $request->material,
                 'substrate'  => $request->substrate,
                 'metal'  => $request->metal,
                 'ligand'  => $request->ligand,
-                'hydride'  => basename($path),
+                'hydride'  => $path,
                 'base'  => $request->base,
                 'solvent'  => $request->solvent,
                 'temperature'  => $request->temperature,
@@ -85,6 +95,11 @@ class ReactionController extends Controller
                 ->withInput()
                 ->withErrors();
         }
+    }
+
+    public function download(Reaction $reaction)
+    {
+        return Storage::disk('s3')->download($reaction->hydride);
     }
 
     public function page_store(Request $request)

@@ -456,7 +456,7 @@
                         <td>
                             @isset ($recode->hydride)
                                 <div>
-                                    <img src="{{ asset('storage/' . $recode->hydride) }}" alt="hydride">
+                                    <img src="{{ $recode->hydride }}" alt="hydride">
                                 </div>
                             @endisset
                         </td>
